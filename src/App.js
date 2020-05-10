@@ -19,7 +19,15 @@ const App = () => {
   const [editing, setEditing] = useState(false);
 
   const addUser = (user) => {
-    user.id = users.length + 1;
+    // user.id = users.length + 1;
+    if (!user.id) {
+      let userIds = users.map((user) => user.id);
+      if (userIds.length > 0) {
+        user.id = Math.max(...userIds) + 1;
+      } else {
+        user.id = 1;
+      }
+    }
     setUsers([...users, user]);
   };
 
